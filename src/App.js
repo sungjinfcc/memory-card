@@ -31,11 +31,6 @@ function App() {
       isChecked: false,
     },
     {
-      name: "브룩",
-      url: "https://cdn.pixabay.com/photo/2020/05/23/12/47/onepiece-5209416_1280.jpg",
-      isChecked: false,
-    },
-    {
       name: "닌텐도",
       url: "https://cdn.pixabay.com/photo/2020/04/15/15/00/gamer-5046924_1280.jpg",
       isChecked: false,
@@ -69,7 +64,8 @@ function App() {
 
   const handleClick = (e) => {
     shuffle();
-    const name = e.target.parentNode.children[0].textContent;
+    const name = e.target.parentNode.parentNode.children[1].textContent;
+
     setCardArray((prev) =>
       prev.map((item) => {
         if (item.name === name) {
@@ -119,18 +115,18 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <h1>Hello world!</h1>
-      <div>
-        Current: {currentScore}, Best: {bestScore}
+    <div className="root">
+      <div className="App">
+        <h1>Memory Game</h1>
+        <div className="score-board">
+          <span className="current">Current: {currentScore}</span>
+          <span className="best">Best: {bestScore}</span>
+        </div>
+        <Content cards={cardArray} onClick={handleClick} />
+        <button className="reset" type="button" onClick={reset}>
+          Reset
+        </button>
       </div>
-      <Content cards={cardArray} onClick={handleClick} />
-      <button type="button" onClick={shuffle}>
-        Shuffle
-      </button>
-      <button type="button" onClick={reset}>
-        Reset
-      </button>
       <Footer />
     </div>
   );
